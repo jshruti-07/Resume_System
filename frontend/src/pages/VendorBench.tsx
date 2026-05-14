@@ -20,6 +20,7 @@ import { useState } from "react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { TM } from "@/config/branding";
 
 const VendorBench = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -70,7 +71,7 @@ const VendorBench = () => {
     setUploading(false);
     setFiles([]);
     if (successCount > 0) {
-      toast.success(`Successfully uploaded ${successCount} candidates to your bench.`);
+      toast.success(`Successfully uploaded ${successCount} ${TM.pluralLower} to your bench.`);
       setIsUploadModalOpen(false);
     }
     if (failCount > 0) {
@@ -80,16 +81,16 @@ const VendorBench = () => {
 
   const handleDelete = async (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
-    if (!window.confirm("Are you sure you want to delete this candidate? This will remove all their data from the portal.")) {
+    if (!window.confirm("Are you sure you want to delete this team member? This will remove all their data from the portal.")) {
       return;
     }
 
     try {
       await vendorDeleteCandidate(id);
-      toast.success("Candidate deleted successfully");
+      toast.success("Team member deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["vendor-candidates"] });
     } catch (error) {
-      toast.error("Failed to delete candidate");
+      toast.error("Failed to delete team member");
     }
   };
 
@@ -103,8 +104,8 @@ const VendorBench = () => {
   return (
     <div className="space-y-8 pb-12">
       <PageHeader
-        title="On-Bench Candidates"
-        description="Manage your available talent pool and upload new potential candidates."
+        title="On-Bench Team Members"
+        description="Manage your available talent pool and upload new potential team members."
         actions={
           <button
             onClick={() => setIsUploadModalOpen(true)}
@@ -155,7 +156,7 @@ const VendorBench = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-border/50 bg-secondary/20">
-                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.1em] text-muted-foreground/60">Candidate Profile</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.1em] text-muted-foreground/60">Team Member Profile</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.1em] text-muted-foreground/60">Experience</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.1em] text-muted-foreground/60">Skills Palette</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.1em] text-muted-foreground/60">Ingested</th>

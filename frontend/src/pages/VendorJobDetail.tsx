@@ -135,7 +135,7 @@ const VendorJobDetail = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border/50">
-                    <th className="text-left py-4 px-4 text-[9px] font-black text-muted-foreground uppercase tracking-widest">Candidate</th>
+                    <th className="text-left py-4 px-4 text-[9px] font-black text-muted-foreground uppercase tracking-widest">Team Member</th>
                     <th className="text-left py-4 px-4 text-[9px] font-black text-muted-foreground uppercase tracking-widest">Status</th>
                     <th className="text-right py-4 px-4 text-[9px] font-black text-muted-foreground uppercase tracking-widest">Action</th>
                   </tr>
@@ -223,7 +223,7 @@ const VendorJobDetail = () => {
               </div>
             </div>
             <p className="text-[11px] text-muted-foreground leading-relaxed italic opacity-80 font-medium">
-              \"This role is explicitly assigned to your synchronization portal. Ensure candidates match all specified criteria before formal ingest.\"
+              \"This role is explicitly assigned to your synchronization portal. Ensure team members match all specified criteria before formal ingest.\"
             </p>
           </div>
         </div>

@@ -102,14 +102,14 @@ const VendorDashboard = () => {
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">1</div>
               <div>
                 <h4 className="font-bold text-foreground mb-1">Quality Over Quantity</h4>
-                <p className="text-sm text-muted-foreground">Ensure candidates match at least 70% of the required skills before uploading.</p>
+                <p className="text-sm text-muted-foreground">Ensure team members match at least 70% of the required skills before uploading.</p>
               </div>
             </div>
             <div className="flex gap-4">
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">2</div>
               <div>
                 <h4 className="font-bold text-foreground mb-1">Update Statuses</h4>
-                <p className="text-sm text-muted-foreground">Keep track of your candidates in the pipeline view. HR will update statuses as they progress.</p>
+                <p className="text-sm text-muted-foreground">Keep track of your team members in the pipeline view. HR will update statuses as they progress.</p>
               </div>
             </div>
             <div className="flex gap-4">

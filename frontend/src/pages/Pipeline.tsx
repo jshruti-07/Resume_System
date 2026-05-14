@@ -110,7 +110,7 @@ const Pipeline = () => {
     return {
       id: app.id,
       candidateId: app.candidate_id,
-      name: candidateById.get(app.candidate_id)?.name || `Candidate #${app.candidate_id}`,
+      name: candidateById.get(app.candidate_id)?.name || `Team Member #${app.candidate_id}`,
       role: role.title,
       roleId: app.job_role_id,
       companyId,
@@ -197,7 +197,7 @@ const Pipeline = () => {
     }
 
     if (selectedCompanyId !== null && draggedCard.companyId !== selectedCompanyId) {
-      toast.error("Security alert: Cannot move candidates between companies!");
+      toast.error("Security alert: Cannot move team members between companies!");
       setDraggedCard(null);
       return;
     }
@@ -332,7 +332,7 @@ const Pipeline = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full flex flex-col">
       <PageHeader
         title="Recruitment Pipeline"
-        description="Manage candidates across different roles and companies"
+        description="Manage team members across different roles and companies"
         actions={
           <div className="flex items-center gap-3">
             <button
@@ -512,7 +512,7 @@ const Pipeline = () => {
             </div>
           </span>
           <span className="text-xs text-muted-foreground">
-            — {totalFiltered} candidate{totalFiltered !== 1 ? "s" : ""} in view
+            — {totalFiltered} team member{totalFiltered !== 1 ? "s" : ""} in view
           </span>
           <button
             onClick={() => {
@@ -557,7 +557,7 @@ const Pipeline = () => {
               </div>
               <h2 className="text-xl font-bold text-foreground mb-3">Select a job role</h2>
               <p className="text-sm text-muted-foreground mb-8">
-                The pipeline view is scoped to individual roles. Please select a role from the dropdown above to manage its candidates.
+                The pipeline view is scoped to individual roles. Please select a role from the dropdown above to manage its team members.
               </p>
               <button
                 onClick={() => setRoleDropdownOpen(true)}
@@ -597,7 +597,7 @@ const Pipeline = () => {
                     {col.cards.length === 0 && (
                       <div className="flex flex-col items-center justify-center h-[180px] text-muted-foreground/40">
                         <User className="w-8 h-8 mb-2" />
-                        <p className="text-xs">No candidates</p>
+                        <p className="text-xs">No team members</p>
                       </div>
                     )}
 
@@ -818,12 +818,12 @@ const Pipeline = () => {
       >
         <div className="space-y-4">
           <div>
-            <label className="label-text mb-2 block">Candidate Note</label>
+            <label className="label-text mb-2 block">Team Member Note</label>
             <textarea
               autoFocus
               value={noteValue}
               onChange={(e) => setNoteValue(e.target.value)}
-              placeholder="Enter candidate status or feedback..."
+              placeholder="Enter team member status or feedback..."
               className="w-full px-4 py-3 rounded-xl bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 min-h-[150px] transition-all"
             />
           </div>

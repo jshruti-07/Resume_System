@@ -253,7 +253,7 @@ const Companies = () => {
           return {
             id: app.id,
             candidateId: app.candidate_id,
-            name: app.candidate_name || `Candidate #${app.candidate_id}`,
+            name: app.candidate_name || `Team Member #${app.candidate_id}`,
             role: role?.title || `Role #${app.job_role_id}`,
             experience: app.experience_years || 0,
             skills: skillsList.slice(0, 2),
@@ -757,7 +757,7 @@ const Companies = () => {
                       </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-bold text-primary">{totalCand}</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">Candidates</span>
+                        <span className="text-[10px] text-muted-foreground uppercase font-bold">Team Members</span>
                       </div>
                     </div>
 
@@ -867,7 +867,7 @@ const Companies = () => {
               <div className="flex items-center border-b border-border px-5 pt-1">
                 {([
                   { key: "roles" as const, label: "Job Roles", icon: Briefcase, count: companyRoles.length },
-                  { key: "candidates" as const, label: "Candidates", icon: Users, count: candTotal },
+                  { key: "candidates" as const, label: "Team Members", icon: Users, count: candTotal },
                   { key: "pipeline" as const, label: "In Progress", icon: GitBranch, count: pipelineTotal },
                 ]).map((t) => (
                   <button
@@ -1076,7 +1076,7 @@ const Companies = () => {
 
                     {/* Candidate cards grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {candLoading && <p className="text-sm text-muted-foreground col-span-2">Loading candidates...</p>}
+                      {candLoading && <p className="text-sm text-muted-foreground col-span-2">Loading team members...</p>}
                       {candItems.map((c, i) => {
                         const displayName = c.name || "Unknown";
                         const initials = displayName.split(" ").filter(Boolean).map((n) => n[0]).join("").slice(0, 2).toUpperCase();
@@ -1105,7 +1105,7 @@ const Companies = () => {
                     {candItems.length === 0 && !candLoading && (
                       <div className="text-center py-12 text-muted-foreground">
                         <Users className="w-8 h-8 mx-auto mb-2 opacity-30" />
-                        <p className="text-sm">No candidates found for {selectedCompany?.name}</p>
+                        <p className="text-sm">No team members found for {selectedCompany?.name}</p>
                       </div>
                     )}
                     {/* Pagination */}
@@ -1495,7 +1495,7 @@ const Companies = () => {
               </div>
             )}
             <p className="text-[9px] text-primary/60 italic leading-tight">
-              * Assigned vendors will immediately receive authority to submit candidates for this role.
+              * Assigned vendors will immediately receive authority to submit team members for this role.
             </p>
           </div>
 
@@ -1701,12 +1701,12 @@ const Companies = () => {
       >
         <div className="space-y-4">
           <div>
-            <label className="label-text mb-2 block font-bold uppercase tracking-tight text-[10px]">Candidate Note</label>
+            <label className="label-text mb-2 block font-bold uppercase tracking-tight text-[10px]">Team Member Note</label>
             <textarea
               autoFocus
               value={noteValue}
               onChange={(e) => setNoteValue(e.target.value)}
-              placeholder="Enter candidate status or feedback..."
+              placeholder="Enter team member status or feedback..."
               className="w-full px-4 py-3 rounded-xl bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 min-h-[150px] transition-all"
             />
           </div>

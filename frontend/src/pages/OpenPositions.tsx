@@ -233,7 +233,7 @@ const OpenPositions = () => {
                   <div className="col-span-2 text-center">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-success/10 text-success text-[11px] font-bold ring-1 ring-success/20">
                       <Users className="w-3.5 h-3.5 opacity-70" />
-                      {company.totalApps} Candidates
+                      {company.totalApps} Team Members
                     </div>
                   </div>
 

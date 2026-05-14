@@ -15,13 +15,14 @@ import {
   Sparkles,
   Settings
 } from "lucide-react";
+import { TM } from "@/config/branding";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/vendor" },
   { label: "Active Jobs", icon: Briefcase, path: "/vendor/jobs" },
   { label: "On Bench Talent", icon: Sparkles, path: "/vendor/bench" },
   { label: "Pipeline", icon: Trello, path: "/vendor/pipeline" },
-  { label: "My Candidates", icon: Users, path: "/vendor/candidates" },
+  { label: `My ${TM.plural}`, icon: Users, path: "/vendor/candidates" },
   { label: "Settings", icon: Settings, path: "/vendor/settings" },
 ];
 

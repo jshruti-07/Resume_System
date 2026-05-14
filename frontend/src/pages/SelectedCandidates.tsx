@@ -73,7 +73,7 @@ const SelectedCandidates = () => {
       return {
         id: app.id,
         candidate_id: app.candidate_id,
-        name: app.candidate_name || `Candidate #${app.candidate_id}`,
+        name: app.candidate_name || `Team Member #${app.candidate_id}`,
         roleTitle: role?.title || "Unknown Role",
         companyName: role?.company_name || "Unknown Company",
         date: app.status_date || app.created_at,
@@ -108,7 +108,7 @@ const SelectedCandidates = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <PageHeader
           title="Successful Hires"
-          description="A comprehensive list of candidates successfully selected across all clients"
+          description="A comprehensive list of team members successfully selected across all clients"
           actions={
             <div className="flex items-center gap-3">
               <div className="relative" ref={sortRef}>
@@ -132,7 +132,7 @@ const SelectedCandidates = () => {
                       className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-xl shadow-2xl z-50 overflow-hidden py-1.5 backdrop-blur-md bg-card/95"
                     >
                       {[
-                        { id: "name", label: "Candidate Name" },
+                        { id: "name", label: "Team Member Name" },
                         { id: "company", label: "Company Name" },
                         { id: "technology", label: "Technology" }
                       ].map((option) => (
@@ -183,7 +183,7 @@ const SelectedCandidates = () => {
                 <UserCheck className="w-8 h-8" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-1">No selections found</h3>
-              <p className="text-sm text-muted-foreground">You haven't marked any candidates as selected yet.</p>
+              <p className="text-sm text-muted-foreground">You haven't marked any team members as selected yet.</p>
             </div>
           ) : (
             selectedCandidates.map((cand) => (
@@ -247,7 +247,7 @@ const SelectedCandidates = () => {
         <div className="hidden md:block glass-card overflow-hidden">
           <div className="p-3 border-b border-border/50 bg-secondary/20">
             <div className="grid grid-cols-12 gap-3 px-6 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-              <div className="col-span-2">Candidate</div>
+              <div className="col-span-2">Team Member</div>
               <div className="col-span-2">Company</div>
               <div className="col-span-2">Technology</div>
               <div className="col-span-2 text-center">Duration</div>
@@ -264,7 +264,7 @@ const SelectedCandidates = () => {
                 </div>
                 <h3 className="text-lg font-bold text-foreground mb-1">No selections found</h3>
                 <p className="text-sm text-muted-foreground">
-                  {searchQuery ? `No results match "${searchQuery}"` : "You haven't marked any candidates as selected yet."}
+                  {searchQuery ? `No results match "${searchQuery}"` : "You haven't marked any team members as selected yet."}
                 </p>
               </div>
             ) : (
@@ -275,7 +275,7 @@ const SelectedCandidates = () => {
                   onClick={() => navigate(`/candidates/${cand.candidate_id}`)}
                   className="grid grid-cols-12 gap-3 py-3 px-6 items-center hover:bg-secondary/30 transition-colors group cursor-pointer"
                 >
-                  {/* Candidate Info */}
+                  {/* Team Member Info */}
                   <div className="col-span-2 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-success/10 flex items-center justify-center text-success font-bold text-xs shadow-sm ring-1 ring-success/20">
                       {cand.name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)}
