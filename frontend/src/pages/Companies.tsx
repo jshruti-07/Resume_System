@@ -25,6 +25,7 @@ import {
   Eye,
   ChevronDown,
   Check,
+  BriefcaseBusiness,
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -32,6 +33,7 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Modal } from "@/components/ui/Modal";
 import { toast } from "sonner";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { AssignVendorDropdown } from "@/components/layout/AssignVendorDropdown";
 import {
   Company,
   Candidate,
@@ -154,6 +156,7 @@ const Companies = () => {
   const [roleDeleteId, setRoleDeleteId] = useState<number | null>(null);
   const [editRoleId, setEditRoleId] = useState<number | null>(null);
   const [updatingRole, setUpdatingRole] = useState(false);
+  const [selectedRoleIds, setSelectedRoleIds] = useState<number[]>([]);
 
   // ─── Candidates state ─────────────────────────────────
   const [candSearch, setCandSearch] = useState("");
@@ -900,12 +903,18 @@ const Companies = () => {
                           {f}
                         </button>
                       ))}
-                      <button
-                        onClick={() => { setRoleForm({ title: "", description: "", deadline: "", estimated_budget: "", currency: "INR", positions_required: 1, pipeline_stages: [...DEFAULT_STAGES], location: "", work_mode: "onsite", experience_required: "", project_time_period: "" }); setRoleModalOpen(true); }}
-                        className="ml-auto px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all flex items-center gap-2"
-                      >
-                        <Plus className="w-4 h-4" /> Add Position
-                      </button>
+                      <div className="ml-auto flex items-center gap-3">
+                        <AssignVendorDropdown 
+                          selectedRoleIds={selectedRoleIds} 
+                          onSuccess={() => setSelectedRoleIds([])} 
+                        />
+                        <button
+                          onClick={() => { setRoleForm({ title: "", description: "", deadline: "", estimated_budget: "", currency: "INR", positions_required: 1, pipeline_stages: [...DEFAULT_STAGES], location: "", work_mode: "onsite", experience_required: "", project_time_period: "" }); setRoleModalOpen(true); }}
+                          className="px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all flex items-center gap-2 shadow-sm"
+                        >
+                          <Plus className="w-4 h-4" /> Add Position
+                        </button>
+                      </div>
                     </div>
                     <div className="flex flex-col gap-3">
                       {companyRoles.map((r) => {
@@ -918,10 +927,25 @@ const Companies = () => {
                             key={r.id}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className={`group relative glass-card p-4 md:p-5 border border-border/50 hover:border-primary/30 transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4 ${!roleIsOpen ? "opacity-60" : ""}`}
+                            className={`group relative glass-card p-4 md:p-5 border transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4 ${selectedRoleIds.includes(r.id) ? "border-primary/50 bg-primary/[0.02]" : "border-border/50 hover:border-primary/30"} ${!roleIsOpen ? "opacity-60" : ""}`}
                             onClick={() => navigate(`/job-roles/${r.id}`)}
                           >
                             <div className="flex items-center gap-4 flex-1 min-w-0">
+                              <div 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedRoleIds(prev => 
+                                    prev.includes(r.id) ? prev.filter(id => id !== r.id) : [...prev, r.id]
+                                  );
+                                }}
+                                className={`w-5 h-5 rounded-lg border-2 transition-all flex items-center justify-center shrink-0 cursor-pointer
+                                  ${selectedRoleIds.includes(r.id) 
+                                    ? "bg-primary border-primary shadow-sm shadow-primary/20" 
+                                    : "bg-background border-border hover:border-primary/50"
+                                  }`}
+                              >
+                                {selectedRoleIds.includes(r.id) && <Check className="w-3.5 h-3.5 text-primary-foreground" />}
+                              </div>
                               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 ring-1 ring-primary/20 shadow-sm">
                                 <Briefcase className="w-6 h-6" />
                               </div>

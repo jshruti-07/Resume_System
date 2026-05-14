@@ -503,6 +503,16 @@ export const assignVendorJob = async (vendorId: number, payload: any): Promise<a
   return data;
 };
 
+export interface VendorAssignmentPayload {
+  vendorIds: number[];
+  roleIds: number[];
+}
+
+export const assignVendorsToJobs = async (payload: VendorAssignmentPayload): Promise<any> => {
+  const { data } = await client.post("/vendor-assignments", payload);
+  return data;
+};
+
 export const unassignJobFromVendorApi = async (vendorId: number, jobRoleId: number): Promise<void> => {
   await client.delete(`/hr/vendors/${vendorId}/assign-job/${jobRoleId}`);
 };
