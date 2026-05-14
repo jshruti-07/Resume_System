@@ -13,12 +13,18 @@ import {
   X,
   Handshake,
   Briefcase,
+  UserCheck,
+  RefreshCcw,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getCompanies, getVendors } from "@/api/resumeiq";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/" },
+  { label: "Total Candidates", icon: Users, path: "/candidates" },
+  { label: "Open Positions", icon: Briefcase, path: "/open-positions" },
+  { label: "Selected", icon: UserCheck, path: "/selected" },
+  { label: "Replacements", icon: RefreshCcw, path: "/replacements" },
   { label: "Candidates", icon: Users, path: "/candidates" },
   { label: "Companies", icon: Building2, path: "/companies" },
   { label: "On Bench Talent", icon: Handshake, path: "/vendors" },
