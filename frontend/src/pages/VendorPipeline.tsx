@@ -53,7 +53,7 @@ const VendorPipeline = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Pipeline Visibility</h1>
-          <p className="text-muted-foreground">Track the progress of your submitted team members in real-time.</p>
+          <p className="text-muted-foreground">Track the progress of your submitted candidates in real-time.</p>
         </div>
 
         <div className="relative">

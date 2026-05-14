@@ -41,8 +41,8 @@ const VendorCandidates = () => {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">My Team Members</h1>
-          <p className="text-muted-foreground">Manage and track team members you have submitted to ResumeIQ.</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">My Candidates</h1>
+          <p className="text-muted-foreground">Manage and track candidates you have submitted to ResumeIQ.</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -66,7 +66,7 @@ const VendorCandidates = () => {
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-white/5 bg-white/[0.02]">
-                <th className="px-6 py-4 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Team Member</th>
+                <th className="px-6 py-4 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Candidate</th>
                 <th className="px-6 py-4 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Expertise</th>
                 <th className="px-6 py-4 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Submitted At</th>
                 <th className="px-6 py-4 text-[10px] font-bold uppercase tracking-wider text-muted-foreground text-right">Actions</th>
@@ -127,7 +127,7 @@ const VendorCandidates = () => {
               ) : (
                 <tr>
                   <td colSpan={4} className="px-6 py-12 text-center text-muted-foreground text-sm">
-                    No team members found matching your search.
+                    No candidates found matches your search.
                   </td>
                 </tr>
               )}

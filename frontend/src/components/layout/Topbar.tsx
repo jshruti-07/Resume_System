@@ -3,12 +3,11 @@ import { Bell, ChevronRight, UserMinus, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { TM } from "@/config/branding";
 
 const routeLabels: Record<string, string> = {
   "companies": "Companies",
   "job-roles": "Job Role",
-  "candidates": TM.plural,
+  "candidates": "Candidate",
   "upload": "Upload",
   "jobs": "Jobs",
   "pipeline": "Pipeline",

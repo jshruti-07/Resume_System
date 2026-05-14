@@ -47,7 +47,6 @@ import {
   getPipeline,
   getCandidates,
 } from "@/api/resumeiq";
-import { TM } from "@/config/branding";
 
 const container = {
   hidden: { opacity: 0 },
@@ -89,7 +88,7 @@ const Dashboard = () => {
   const jobRoles = jobRolesData ?? [];
   const { data: pipeline = {} } = useQuery({ queryKey: ["pipeline"], queryFn: () => getPipeline() });
 
-  // ── Team Member Search ────────────────────────────────
+  // ── Candidate Search ──────────────────────────────────
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
@@ -191,8 +190,8 @@ const Dashboard = () => {
     () =>
       (data?.recent_uploads ?? []).slice(0, 15).map((u) => ({
         candidate_id: u.candidate_id,
-        action: `New ${TM.singularLower} added`,
-        name: u.name || u.email || `${TM.singular} #${u.candidate_id}`,
+        action: "New candidate uploaded",
+        name: u.name || u.email || `Candidate #${u.candidate_id}`,
         time: new Date(u.created_at).toLocaleString(),
         status: "Screening",
       })),
@@ -227,7 +226,7 @@ const Dashboard = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder={`Search ${TM.pluralLower} by name...`}
+                  placeholder="Search candidates by name..."
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -249,7 +248,7 @@ const Dashboard = () => {
                       <div className="max-h-80 overflow-y-auto">
                         {searchResults?.items.length === 0 ? (
                           <div className="p-4 text-center">
-                            <p className="text-xs text-muted-foreground italic">No {TM.pluralLower} found for "{debouncedQuery}"</p>
+                            <p className="text-xs text-muted-foreground italic">No candidates found for "{debouncedQuery}"</p>
                           </div>
                         ) : (
                           searchResults?.items.map((candidate) => (
@@ -297,7 +296,7 @@ const Dashboard = () => {
       {/* ─── Row 1: Primary Metrics ─────────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          label={`Total ${TM.plural}`}
+          label="Total Candidates"
           value={data?.total_candidates ?? 0}
           icon={Users}
           trend="+14%"
@@ -579,7 +578,7 @@ const Dashboard = () => {
               <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
             </div>
           ) : skillCandidates?.items.length === 0 ? (
-            <p className="text-center text-sm text-muted-foreground py-10">No {TM.pluralLower} found for this skill.</p>
+            <p className="text-center text-sm text-muted-foreground py-10">No candidates found for this skill.</p>
           ) : (
             <div className="space-y-2">
               <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-2 px-1">Top Matches</p>

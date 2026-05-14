@@ -16,11 +16,10 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getCompanies, getVendors } from "@/api/resumeiq";
-import { TM } from "@/config/branding";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/" },
-  { label: TM.plural, icon: Users, path: "/candidates" },
+  { label: "Candidates", icon: Users, path: "/candidates" },
   { label: "Companies", icon: Building2, path: "/companies" },
   { label: "On Bench Talent", icon: Handshake, path: "/vendors" },
 ];

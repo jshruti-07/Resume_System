@@ -56,7 +56,7 @@ const VendorLogin = () => {
           </h1>
 
           <p className="text-white/70 text-lg max-w-md leading-relaxed">
-            Manage your team member submissions, track their progress in the hiring pipeline,
+            Manage your candidate submissions, track their progress in the hiring pipeline,
             and view assigned job openings in one secure platform.
           </p>
         </div>

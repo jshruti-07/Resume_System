@@ -270,7 +270,7 @@ const JobRoles = () => {
               </div>
             )}
             <p className="text-[9px] text-primary/60 italic leading-tight">
-              * Assigned vendors will immediately receive authority to submit team members for this role.
+              * Assigned vendors will immediately receive authority to submit candidates for this role.
             </p>
           </div>
 
@@ -299,7 +299,7 @@ const JobRoles = () => {
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground leading-relaxed">
             {confirmAction === "close"
-              ? "Are you sure you want to close this role? This indicates that the required team members have been achieved and no further applications will be accepted."
+              ? "Are you sure you want to close this role? This indicates that the required candidates have been achieved and no further applications will be accepted."
               : "Are you sure you want to reopen this role? This will allow new applications to be submitted again."}
           </p>
           <div className="flex items-center gap-3 pt-2">

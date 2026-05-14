@@ -266,7 +266,7 @@ const JobRoleDetail = () => {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Team Member</th>
+                <th className="text-left py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Candidate</th>
                 <th className="text-left py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Source</th>
                 <th className="text-left py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Status</th>
                 <th className="text-left py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Resume</th>
@@ -289,7 +289,7 @@ const JobRoleDetail = () => {
                     className="py-3 px-4 text-sm text-foreground font-bold flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"
                     onClick={() => navigate(`/candidates/${app.candidate_id}`)}
                   >
-                    {candidateById.get(app.candidate_id)?.name || `Team Member #${app.candidate_id}`}
+                    {candidateById.get(app.candidate_id)?.name || `Candidate #${app.candidate_id}`}
                     {app.is_replacement && (
                       <span className="px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 text-[8px] font-bold border border-amber-500/20 uppercase tracking-widest whitespace-nowrap">
                         REPLACEMENT
@@ -337,7 +337,7 @@ const JobRoleDetail = () => {
         <div className="space-y-4">
           <p className="body-text">
             {isOpen
-              ? "Are you sure you want to close this role? This indicates that the required team members have been achieved and no further applications will be accepted."
+              ? "Are you sure you want to close this role? This indicates that the required candidates have been achieved and no further applications will be accepted."
               : "Are you sure you want to reopen this role? This will allow new applications to be submitted again."}
           </p>
           <div className="flex items-center gap-3 pt-2">

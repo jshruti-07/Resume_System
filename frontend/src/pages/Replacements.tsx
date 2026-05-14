@@ -72,7 +72,7 @@ const Replacements = () => {
         return {
           id: app.id,
           candidate_id: app.candidate_id,
-          name: app.candidate_name || `Team Member #${app.candidate_id}`,
+          name: app.candidate_name || `Candidate #${app.candidate_id}`,
           roleTitle: role?.title || "Unknown Role",
           companyName: role?.company_name || "Unknown Company",
           date: app.status_date || app.created_at,
@@ -106,7 +106,7 @@ const Replacements = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <PageHeader
           title="Staffing Replacements"
-          description="team members hired to fill existing staffing gaps and role vacancies"
+          description="Candidates hired to fill existing staffing gaps and role vacancies"
           actions={
             <div className="flex items-center gap-3">
               <div className="relative group w-full md:w-64">
@@ -133,7 +133,7 @@ const Replacements = () => {
                 <UserX className="w-8 h-8" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-1">No replacements found</h3>
-              <p className="text-sm text-muted-foreground">No team members have been marked as replacements yet.</p>
+              <p className="text-sm text-muted-foreground">No candidates have been marked as replacements yet.</p>
             </div>
           ) : (
             replacementCandidates.map((cand) => (
@@ -210,7 +210,7 @@ const Replacements = () => {
                 </div>
                 <h3 className="text-lg font-bold text-foreground mb-1">No replacements found</h3>
                 <p className="text-sm text-muted-foreground">
-                  {searchQuery ? `No results match "${searchQuery}"` : "No team members have been marked as replacements yet."}
+                  {searchQuery ? `No results match "${searchQuery}"` : "No candidates have been marked as replacements yet."}
                 </p>
               </div>
             ) : (
@@ -221,7 +221,7 @@ const Replacements = () => {
                   onClick={() => navigate(`/candidates/${cand.candidate_id}`)}
                   className="grid grid-cols-12 gap-3 py-3 px-6 items-center hover:bg-secondary/30 transition-colors group cursor-pointer"
                 >
-                  {/* Team Member Info */}
+                  {/* Candidate Info */}
                   <div className="col-span-4 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-warning/10 flex items-center justify-center text-warning font-bold text-xs shadow-sm ring-1 ring-warning/20">
                       {cand.name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)}

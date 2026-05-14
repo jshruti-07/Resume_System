@@ -165,12 +165,12 @@ const Vendors = () => {
     mutationFn: (id: number) => deleteCandidate(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["candidates-hub"] });
-      toast.success("Team member record removed from bench");
+      toast.success("Candidate record removed from bench");
       setIsDeleteCandidateModalOpen(false);
       setCandidateToDelete(null);
     },
     onError: (err: any) => {
-      toast.error(err.response?.data?.detail || "Failed to remove team member");
+      toast.error(err.response?.data?.detail || "Failed to remove candidate");
     }
   });
 
@@ -319,7 +319,7 @@ const Vendors = () => {
           <div className="glass-card overflow-hidden">
             <div className="hidden md:block p-4 border-b border-border/50 bg-secondary/20">
               <div className="grid grid-cols-12 gap-x-2 px-6 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-                <div className="col-span-3">Team Member</div>
+                <div className="col-span-3">Candidate</div>
                 <div className="col-span-1 pl-6">Experience</div>
                 <div className="col-span-1" /> {/* Spacer */}
                 <div className="col-span-4">Skills</div>
@@ -333,7 +333,7 @@ const Vendors = () => {
                 [1, 2, 3].map(i => <div key={i} className="h-24 animate-pulse bg-white/5" />)
               ) : candidates.length === 0 ? (
                 <div className="p-20 text-center">
-                  <p className="text-sm text-muted-foreground italic">No team members found on bench.</p>
+                  <p className="text-sm text-muted-foreground italic">No candidates found on bench.</p>
                 </div>
               ) : (
                 candidates.map((c) => (
@@ -390,7 +390,7 @@ const Vendors = () => {
                           setIsDeleteCandidateModalOpen(true);
                         }}
                         className="p-2 rounded-lg text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all active:scale-90"
-                        title="Delete Team Member"
+                        title="Delete Candidate"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -628,14 +628,14 @@ const Vendors = () => {
       </Modal>
 
       {/* Candidate Delete Confirmation Modal */}
-      <Modal open={isDeleteCandidateModalOpen} onClose={() => setIsDeleteCandidateModalOpen(false)} title="Remove Team Member from Bench">
+      <Modal open={isDeleteCandidateModalOpen} onClose={() => setIsDeleteCandidateModalOpen(false)} title="Remove Candidate from Bench">
         <div className="space-y-4">
           <div className="p-4 rounded-xl bg-destructive/5 border border-destructive/10 flex items-start gap-4">
             <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center text-destructive shrink-0">
               <Trash2 className="w-5 h-5" />
             </div>
             <div className="space-y-1">
-              <p className="text-sm font-bold text-foreground">Delete team member record?</p>
+              <p className="text-sm font-bold text-foreground">Delete candidate record?</p>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Are you sure you want to delete <strong>{candidateToDelete?.name}</strong>?
                 This will permanently remove their profile and all associated data from the Talent Hub.

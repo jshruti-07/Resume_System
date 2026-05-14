@@ -9,7 +9,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Candidate, deleteCandidate, getCandidates, getCompanies, getVendors, getJobRoles, getPipeline } from "@/api/resumeiq";
 import UploadPage from "./Upload";
 import { toast } from "sonner";
-import { TM } from "@/config/branding";
 
 const PAGE_SIZE = 15;
 
@@ -106,17 +105,17 @@ const Candidates = () => {
 
   const handleDeleteCandidate = async (e: React.MouseEvent, id: number, name: string) => {
     e.stopPropagation();
-    if (!window.confirm(`Are you sure you want to delete ${name || `this ${TM.singularLower}`}? This will also remove all their applications.`)) {
+    if (!window.confirm(`Are you sure you want to delete ${name || "this candidate"}? This will also remove all their applications.`)) {
       return;
     }
 
     try {
       await deleteCandidate(id);
-      toast.success("Team member deleted successfully");
+      toast.success("Candidate deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["candidates"] });
       queryClient.invalidateQueries({ queryKey: ["pipeline"] });
     } catch (error) {
-      toast.error("Failed to delete team member");
+      toast.error("Failed to delete candidate");
       console.error(error);
     }
   };
@@ -124,8 +123,8 @@ const Candidates = () => {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
       <PageHeader
-        title={vendorIdFromUrl ? `${unassignedOnly ? "On Bench" : "Talent Pool"}: ${vendorsData?.find(v => v.id === vendorIdFromUrl)?.name || "Partner"}` : TM.directory}
-        description={vendorIdFromUrl ? `Viewing ${unassignedOnly ? `available ${TM.pluralLower}` : TM.pluralLower} provided by ${vendorsData?.find(v => v.id === vendorIdFromUrl)?.name || "this partner"}` : "Comprehensive list of all talent in the system"}
+        title={vendorIdFromUrl ? `${unassignedOnly ? 'On Bench' : 'Talent Pool'}: ${vendorsData?.find(v => v.id === vendorIdFromUrl)?.name || "Partner"}` : "Candidate Directory"}
+        description={vendorIdFromUrl ? `Viewing ${unassignedOnly ? 'available ' : ''}candidates provided by ${vendorsData?.find(v => v.id === vendorIdFromUrl)?.name || "this partner"}` : "Comprehensive list of all talent in the system"}
         actions={
           <button
             onClick={() => setUploadModalOpen(true)}
@@ -239,7 +238,7 @@ const Candidates = () => {
         )}
       </AnimatePresence>
 
-      {/* Team Member List - Mobile Card View / Desktop Table View */}
+      {/* Candidate List - Mobile Card View / Desktop Table View */}
       <div className="space-y-4">
         {/* Mobile View (Cards) */}
         <div className="grid grid-cols-1 gap-4 md:hidden">
@@ -250,7 +249,7 @@ const Candidates = () => {
             </div>
           ) : candidates.length === 0 ? (
             <div className="py-20 text-center glass-card rounded-xl">
-              <p className="text-sm text-muted-foreground italic">No team members found.</p>
+              <p className="text-sm text-muted-foreground italic">No candidates found.</p>
             </div>
           ) : (
             candidates.map((c) => (
@@ -335,7 +334,7 @@ const Candidates = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-border bg-secondary/30">
-                  <th className="py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{TM.singular}</th>
+                  <th className="py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Candidate</th>
                   <th className="py-3 px-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Contact Information</th>
                   <th className="py-3 pl-0 pr-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Experience</th>
                   <th className="py-3 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Top Skills</th>
@@ -361,7 +360,7 @@ const Candidates = () => {
                 ) : candidates.length === 0 ? (
                   <tr>
                     <td colSpan={7} className="py-20 text-center">
-                      <p className="text-sm text-muted-foreground italic">No team members found matching your criteria.</p>
+                      <p className="text-sm text-muted-foreground italic">No candidates found matching your criteria.</p>
                     </td>
                   </tr>
                 ) : (
@@ -380,7 +379,7 @@ const Candidates = () => {
                             {c.name?.split(" ").filter(Boolean).map(n => n[0]).join("").toUpperCase().slice(0, 2) || "??"}
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{c.name || "Unknown Team Member"}</p>
+                            <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{c.name || "Unknown Candidate"}</p>
                             {c.is_replacement && (
                               <span className="text-[8px] font-black text-amber-500 uppercase tracking-widest">REPLACEMENT</span>
                             )}
@@ -459,7 +458,7 @@ const Candidates = () => {
                           <button
                             onClick={(e) => handleDeleteCandidate(e, c.id, c.name)}
                             className="p-2 rounded-lg bg-destructive/10 text-destructive hover:bg-destructive hover:text-white transition-all shadow-sm"
-                            title="Delete Team Member"
+                            title="Delete Candidate"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -476,7 +475,7 @@ const Candidates = () => {
         {/* Pagination Footer */}
         <div className="p-4 bg-secondary/20 border-t border-border flex items-center justify-between">
           <p className="text-xs text-muted-foreground font-medium">
-            Showing <span className="text-foreground">{candidates.length}</span> of <span className="text-foreground">{totalFromServer}</span> {TM.pluralLower}
+            Showing <span className="text-foreground">{candidates.length}</span> of <span className="text-foreground">{totalFromServer}</span> candidates
           </p>
 
           <div className="flex items-center gap-4">

@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getVendorCandidateById } from "@/api/resumeiq";
 import client from "@/api/client";
 import { toast } from "sonner";
-import { TM } from "@/config/branding";
 
 const VendorCandidateDetail = () => {
   const { id } = useParams();
@@ -55,7 +54,7 @@ const VendorCandidateDetail = () => {
       const url = URL.createObjectURL(new Blob([res.data], { type: mime }));
       const a = document.createElement("a");
       a.href = url;
-      a.download = c.original_filename || `${TM.singularLower.replace(" ", "-")}-${c.id}.pdf`;
+      a.download = c.original_filename || `candidate-${c.id}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -67,9 +66,9 @@ const VendorCandidateDetail = () => {
   };
 
   if (isLoading) return <div className="p-8 text-center text-muted-foreground animate-pulse font-medium">Loading profile...</div>;
-  if (isError || !c) return <div className="p-8 text-center text-muted-foreground font-medium">Team member not found or access denied.</div>;
+  if (isError || !c) return <div className="p-8 text-center text-muted-foreground font-medium">Candidate not found or access denied.</div>;
 
-  const candidateName = c.name || "Unnamed Team Member";
+  const candidateName = c.name || "Unnamed Candidate";
   const initials = candidateName.charAt(0).toUpperCase() || "?";
 
   return (
@@ -79,7 +78,7 @@ const VendorCandidateDetail = () => {
         className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group mb-4 font-medium"
       >
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        Back to Team Directory
+        Back to Candidate Directory
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

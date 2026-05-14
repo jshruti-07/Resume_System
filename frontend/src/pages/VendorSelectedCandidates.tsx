@@ -52,7 +52,7 @@ const VendorSelectedCandidates = () => {
       return {
         id: app.id,
         candidate_id: app.candidate_id,
-        name: app.candidate_name || `Team Member #${app.candidate_id}`,
+        name: app.candidate_name || `Candidate #${app.candidate_id}`,
         roleTitle: role?.title || "Unknown Role",
         companyName: role?.company_name || "Unknown Company",
         date: app.status_date || app.created_at,
@@ -85,7 +85,7 @@ const VendorSelectedCandidates = () => {
         </button>
         <PageHeader
           title="Successful Hires"
-          description="team members you've submitted that were successfully selected"
+          description="Candidates you've submitted that were successfully selected"
           actions={
             <div className="flex items-center gap-3">
               <div className="relative group w-full md:w-64">
@@ -108,7 +108,7 @@ const VendorSelectedCandidates = () => {
         <div className="hidden md:block glass-card overflow-hidden">
           <div className="p-3 border-b border-border/50 bg-secondary/20">
             <div className="grid grid-cols-12 gap-3 px-6 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-              <div className="col-span-4">Team Member</div>
+              <div className="col-span-4">Candidate</div>
               <div className="col-span-3">Company</div>
               <div className="col-span-3">Job Role</div>
               <div className="col-span-2 text-right">Actions</div>

@@ -12,7 +12,6 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { getVendorJobs, vendorUploadResume } from "@/api/resumeiq";
 import { toast } from "sonner";
-import { TM } from "@/config/branding";
 
 const VendorUpload = () => {
     const [searchParams] = useSearchParams();
@@ -76,7 +75,7 @@ const VendorUpload = () => {
 
         const successCount = allResults.filter(r => r.success).length;
         if (successCount > 0) {
-            toast.success(`Successfully uploaded ${successCount} ${TM.pluralLower}`);
+            toast.success(`Successfully uploaded ${successCount} candidates`);
             setFiles([]);
         }
     };
@@ -85,7 +84,7 @@ const VendorUpload = () => {
         <div className="max-w-4xl mx-auto space-y-8">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold text-foreground mb-2">Upload Team Members</h1>
+                    <h1 className="text-3xl font-bold text-foreground mb-2">Upload Candidates</h1>
                     <p className="text-muted-foreground">Synchronize your talent pool with ResumeIQ.</p>
                 </div>
             </div>
@@ -226,7 +225,7 @@ const VendorUpload = () => {
                         className="px-6 py-3 rounded-xl border border-border text-xs font-bold text-muted-foreground hover:bg-secondary transition-all"
                         disabled={uploading}
                     >
-                        Return to Team Members
+                        Return to Candidates
                     </button>
                     <button
                         onClick={handleUpload}

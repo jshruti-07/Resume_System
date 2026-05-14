@@ -14,7 +14,6 @@ import {
   updateCandidate,
   deleteCandidate,
 } from "@/api/resumeiq";
-import { TM } from "@/config/branding";
 
 const CandidateDetail = () => {
   const { id } = useParams();
@@ -28,7 +27,7 @@ const CandidateDetail = () => {
     enabled: Number.isFinite(candidateId),
   });
 
-  // Fetch applications for this team member
+  // Fetch applications for this candidate
   const { data: appsData } = useQuery({
     queryKey: ["candidate-applications", candidateId],
     queryFn: () => getApplicationsByCandidate(candidateId),
@@ -103,10 +102,10 @@ const CandidateDetail = () => {
       });
       await queryClient.invalidateQueries({ queryKey: ["candidate", candidateId] });
       await queryClient.invalidateQueries({ queryKey: ["candidates"] });
-      toast.success("Team member updated");
+      toast.success("Candidate updated");
       setEditOpen(false);
     } catch {
-      toast.error("Failed to update team member");
+      toast.error("Failed to update candidate");
     } finally {
       setSaving(false);
     }
@@ -118,10 +117,10 @@ const CandidateDetail = () => {
     try {
       await deleteCandidate(c.id);
       await queryClient.invalidateQueries({ queryKey: ["candidates"] });
-      toast.success("Team member deleted");
+      toast.success("Candidate deleted");
       navigate("/candidates");
     } catch {
-      toast.error("Failed to delete team member");
+      toast.error("Failed to delete candidate");
     } finally {
       setDeleting(false);
     }
@@ -134,7 +133,7 @@ const CandidateDetail = () => {
       const url = URL.createObjectURL(new Blob([res.data], { type: "application/pdf" }));
       const a = document.createElement("a");
       a.href = url;
-      a.download = c.original_filename || `${TM.singularLower.replace(" ", "-")}-${c.id}.pdf`;
+      a.download = c.original_filename || `candidate-${c.id}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -144,8 +143,8 @@ const CandidateDetail = () => {
     }
   };
 
-  if (isLoading) return <p className="text-sm text-muted-foreground">Loading team member...</p>;
-  if (isError || !c) return <p className="text-sm text-muted-foreground">Team member not found.</p>;
+  if (isLoading) return <p className="text-sm text-muted-foreground">Loading candidate...</p>;
+  if (isError || !c) return <p className="text-sm text-muted-foreground">Candidate not found.</p>;
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -316,10 +315,10 @@ const CandidateDetail = () => {
       </div>
 
       {/* Edit Modal */}
-      <Modal open={editOpen} onClose={() => setEditOpen(false)} title={`Edit ${TM.singular}`}>
+      <Modal open={editOpen} onClose={() => setEditOpen(false)} title="Edit Candidate">
         <div className="space-y-4">
           <div>
-            <label className="label-text mb-2 block">{TM.name}</label>
+            <label className="label-text mb-2 block">Name</label>
             <input
               value={editForm.name}
               onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
@@ -374,10 +373,10 @@ const CandidateDetail = () => {
       </Modal>
 
       {/* Delete Confirmation Modal */}
-      <Modal open={deleteOpen} onClose={() => setDeleteOpen(false)} title={`Delete ${TM.singular}`}>
+      <Modal open={deleteOpen} onClose={() => setDeleteOpen(false)} title="Delete Candidate">
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Are you sure you want to delete <strong>{c.name || "this team member"}</strong>? This will also remove all associated applications. This action cannot be undone.
+            Are you sure you want to delete <strong>{c.name || "this candidate"}</strong>? This will also remove all associated applications. This action cannot be undone.
           </p>
           <div className="flex gap-3">
             <button
