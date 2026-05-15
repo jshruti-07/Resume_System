@@ -390,7 +390,7 @@ const Dashboard = () => {
           </div>
 
           <div className="space-y-4">
-            <h4 className="label-text mb-4 text-primary">Active Opportunities</h4>
+            <h4 className="label-text mb-4 text-primary">Clients</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {jobRoles
                 .filter(r => r.status === "open")
@@ -409,7 +409,7 @@ const Dashboard = () => {
                       <p className="text-sm font-bold text-foreground truncate group-hover:text-primary transition-colors">{r.title}</p>
                       <div className="flex items-center gap-3 mt-1">
                         <span className="flex items-center gap-1 text-[9px] text-muted-foreground font-bold uppercase tracking-wide">
-                          <Building2 className="w-2.5 h-2.5" /> 
+                          <Building2 className="w-2.5 h-2.5" />
                           {r.company_name || "Unknown"}
                         </span>
                         <span className="flex items-center gap-1 text-[9px] text-primary/80 font-bold uppercase tracking-wide">

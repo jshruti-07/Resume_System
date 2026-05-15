@@ -33,16 +33,16 @@ const OpenPositions = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // ── Data queries ──────────────────────────────────────
-  const { data: companies = [] } = useQuery({ 
-    queryKey: ["companies"], 
-    queryFn: () => getCompanies() 
+  const { data: companies = [] } = useQuery({
+    queryKey: ["companies"],
+    queryFn: () => getCompanies()
   });
   const { data: jobRoles = [] } = useQuery({ queryKey: ["job-roles"], queryFn: () => getJobRoles() });
   const { data: pipeline = {} as any } = useQuery({ queryKey: ["pipeline"], queryFn: () => getPipeline() });
 
   const companyWithRoles = useMemo(() => {
     const map = new Map<number, { id: number; name: string; roles: any[]; totalApps: number }>();
-    
+
     // Initialize map with companies
     companies.forEach(c => {
       map.set(c.id, { id: c.id, name: c.name, roles: [], totalApps: 0 });
@@ -74,8 +74,8 @@ const OpenPositions = () => {
 
     if (!searchQuery.trim()) return list;
     const lower = searchQuery.toLowerCase();
-    return list.filter(c => 
-      c.name.toLowerCase().includes(lower) || 
+    return list.filter(c =>
+      c.name.toLowerCase().includes(lower) ||
       c.roles.some(r => r.title.toLowerCase().includes(lower))
     );
   }, [companies, jobRoles, pipeline, searchQuery]);
@@ -84,7 +84,7 @@ const OpenPositions = () => {
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <PageHeader
-          title="Active Opportunities"
+          title="Clients"
           description="Listing all partner companies with strategic positions currently open"
           actions={
             <div className="flex flex-col md:flex-row items-center gap-3 w-full md:w-auto">
@@ -117,8 +117,8 @@ const OpenPositions = () => {
           </div>
           <h3 className="text-xl font-bold text-foreground mb-2">No open positions found</h3>
           <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-            {searchQuery 
-              ? `No results match "${searchQuery}". Try a different search term.` 
+            {searchQuery
+              ? `No results match "${searchQuery}". Try a different search term.`
               : "There are currently no active job roles across all companies."}
           </p>
         </div>
@@ -154,7 +154,7 @@ const OpenPositions = () => {
                   <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Featured Roles</p>
                   <div className="flex flex-wrap gap-1.5">
                     {company.roles.slice(0, 3).map(role => (
-                      <span 
+                      <span
                         key={role.id}
                         className="px-2 py-1 rounded bg-secondary text-[10px] font-bold border border-border"
                       >
@@ -215,7 +215,7 @@ const OpenPositions = () => {
                   {/* Active Positions List */}
                   <div className="col-span-5 flex flex-wrap gap-2">
                     {company.roles.slice(0, 3).map(role => (
-                      <div 
+                      <div
                         key={role.id}
                         onClick={(e) => { e.stopPropagation(); navigate(`/job-roles/${role.id}`); }}
                         className="flex flex-col gap-1 p-2 rounded-lg bg-secondary/50 border border-border/50 hover:border-primary/30 hover:bg-primary/[0.02] transition-all cursor-pointer group/role"
@@ -263,9 +263,9 @@ const OpenPositions = () => {
         </div>
       )}
 
-      <AddOpenPositionModal 
-        open={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <AddOpenPositionModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
     </motion.div>
   );
